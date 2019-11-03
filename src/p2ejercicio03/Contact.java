@@ -11,19 +11,19 @@ package p2ejercicio03;
  */
 public class Contact {
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
     private String mail;
     private String lastName;
     private String address;
-    private int alternateNumber;
+    private String alternateNumber;
     
     public Contact(){}
     
-    public Contact(String name, int phoneNumber) {
+    public Contact(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
-
+    
     /**
      * @return the name
      */
@@ -41,14 +41,14 @@ public class Contact {
     /**
      * @return the phoneNumber
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     /**
      * @param phoneNumber the phoneNumber to set
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -97,14 +97,14 @@ public class Contact {
     /**
      * @return the alternateNumber
      */
-    public int getAlternateNumber() {
+    public String getAlternateNumber() {
         return alternateNumber;
     }
 
     /**
      * @param alternateNumber the alternateNumber to set
      */
-    public void setAlternateNumber(int alternateNumber) {
+    public void setAlternateNumber(String alternateNumber) {
         this.alternateNumber = alternateNumber;
     }
 }

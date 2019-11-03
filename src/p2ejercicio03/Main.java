@@ -6,8 +6,11 @@
 package p2ejercicio03;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 /**
@@ -15,11 +18,12 @@ import javax.swing.JTextField;
  * @author alumnotic
  */
 public class Main {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        List<Contact> listContacts = new ArrayList<Contact>();
+        
         // TODO code application logic here
         JFrame mainFrame = new JFrame();
         mainFrame.setBounds(100, 100, 220, 400);
@@ -53,8 +57,8 @@ public class Main {
         // Crear textfield Phone Number
         JTextField textFieldPhoneNumber = new JTextField();
         textFieldPhoneNumber.setBounds(128, 88, 86, 20);
+        
         mainFrame.getContentPane().add(textFieldPhoneNumber);
-        textFieldPhoneNumber.setColumns(10);
         
         // Crear etiqueta Phone Number
         JLabel labelPhoneNumber = new JLabel("Phone Number");
@@ -120,9 +124,71 @@ public class Main {
         // Crear button Save
         Button saveBtn = new Button("Save");
         saveBtn.setBounds(145, 320, 70, 30);
+        saveBtn.addActionListener((ActionEvent e) -> {
+            // Validate
+            boolean isValid = true;
+            // Name
+            String stringPattern = "[a-zA-Z\\s]*";
+            if (!textFieldName.getText().matches(stringPattern) || textFieldName.getText().isEmpty()) {
+                isValid = false;
+                textFieldName.setText(null);
+                JOptionPane.showMessageDialog(mainFrame, "Por favor escriba su nombre o asegurese que este bien escrito.", "Formato no válido", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // Last name
+            if (!textFieldLastName.getText().matches(stringPattern)) {
+                isValid = false;
+                textFieldLastName.setText(null);
+                JOptionPane.showMessageDialog(mainFrame, "Por favor escriba su apellidos o asegurese que este bien escrito.", "Formato no válido", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // Phone number
+            String phoneNumberPattern = "\\d{10}";
+            if (!textFieldPhoneNumber.getText().matches(phoneNumberPattern)) {
+                isValid = false;
+                textFieldPhoneNumber.setText(null);
+                JOptionPane.showMessageDialog(mainFrame, "Por favor escriba un número válido.", "Formato no válido", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // Alternate number
+            if (!textFieldAlternateNumber.getText().matches(phoneNumberPattern) && !textFieldAlternateNumber.getText().isEmpty()) {
+                isValid = false;
+                textFieldAlternateNumber.setText(null);
+                JOptionPane.showMessageDialog(mainFrame, "Por favor escriba un número válido.", "Formato no válido", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            String emailPattern = "^(.+)@(.+)$";
+            if (!textFieldMail.getText().matches(emailPattern) && !textFieldMail.getText().isEmpty()) {
+                isValid = false;
+                textFieldMail.setText(null);
+                JOptionPane.showMessageDialog(mainFrame, "Por favor escriba un email válido.", "Formato no válido", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            Contact contact = new Contact(textFieldName.getText(), textFieldPhoneNumber.getText());
+            contact.setLastName(textFieldLastName.getText());
+            contact.setAlternateNumber(textFieldAlternateNumber.getText());
+            contact.setMail(textFieldMail.getText());
+            contact.setAddress(textAreadAddress.getText());
+            
+            if (isValid) {
+                // Save
+                listContacts.add(contact);
+                // Prints
+                System.out.println(listContacts);
+                
+                // Cleaning fields
+                textFieldName.setText(null);
+                textFieldLastName.setText(null);
+                textFieldPhoneNumber.setText(null);
+                textFieldAlternateNumber.setText(null);
+                textFieldMail.setText(null);
+                textAreadAddress.setText(null);
+            }
+
+        });
+        
         mainFrame.getContentPane().add(saveBtn);
         
         mainFrame.setVisible(true);
     }
-    
 }
