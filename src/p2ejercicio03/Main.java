@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package p2ejercicio03;
+import java.awt.Button;
+import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -20,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         JFrame mainFrame = new JFrame();
-        mainFrame.setBounds(100, 100, 730, 489);
+        mainFrame.setBounds(100, 100, 220, 400);
         
         mainFrame.setDefaultCloseOperation(
                 JFrame.EXIT_ON_CLOSE);
@@ -56,7 +58,7 @@ public class Main {
         
         // Crear etiqueta Phone Number
         JLabel labelPhoneNumber = new JLabel("Phone Number");
-        labelPhoneNumber.setBounds(10, 91, 90, 14);
+        labelPhoneNumber.setBounds(10, 91, 100, 14);
         mainFrame.getContentPane().add(labelPhoneNumber);
         
         // Crear textfield Alternate Number
@@ -67,7 +69,7 @@ public class Main {
         
         // Crear etiqueta Alternate Number
         JLabel labelAlternateNumber = new JLabel("Alternate Number");
-        labelAlternateNumber.setBounds(10, 121, 100, 14);
+        labelAlternateNumber.setBounds(10, 121, 120, 14);
         mainFrame.getContentPane().add(labelAlternateNumber);
         
         // Crear textfield Mail
@@ -83,7 +85,7 @@ public class Main {
         
         // Crear textfield Address
         JTextArea textAreadAddress = new JTextArea();
-        textAreadAddress.setBounds(10, 200, 211, 100);
+        textAreadAddress.setBounds(10, 200, 200, 100);
         mainFrame.getContentPane().add(textAreadAddress);
         textAreadAddress.setColumns(10);
         
@@ -91,6 +93,34 @@ public class Main {
         JLabel labelAddress = new JLabel("Address");
         labelAddress.setBounds(10, 181, 100, 14);
         mainFrame.getContentPane().add(labelAddress);
+        
+        // Crear button Cancel
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.setBounds(5, 320, 70, 30);
+        cancelBtn.addActionListener((ActionEvent e) -> {
+            System.exit(0);
+        });
+        
+        mainFrame.getContentPane().add(cancelBtn);
+        
+        // Crear button Clear
+        Button clearBtn = new Button("Clear");
+        clearBtn.setBounds(75, 320, 70, 30);
+        clearBtn.addActionListener((ActionEvent e) -> {
+            textFieldName.setText(null);
+            textFieldLastName.setText(null);
+            textFieldPhoneNumber.setText(null);
+            textFieldAlternateNumber.setText(null);
+            textFieldMail.setText(null);
+            textAreadAddress.setText(null);
+        });
+                
+        mainFrame.getContentPane().add(clearBtn);
+        
+        // Crear button Save
+        Button saveBtn = new Button("Save");
+        saveBtn.setBounds(145, 320, 70, 30);
+        mainFrame.getContentPane().add(saveBtn);
         
         mainFrame.setVisible(true);
     }
